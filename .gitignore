@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+*/node_modules/
+
+# Build output
+dist/
+*/dist/
+backend/dist/
+
+# Database & uploads (local data - do NOT commit)
+data/
+
+# Environment files (contain secrets)
+.env
+*/.env
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Vite
+*.local
