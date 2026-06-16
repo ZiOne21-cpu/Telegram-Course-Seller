@@ -4,5 +4,24 @@
     { "source": "/uploads/:path*", "destination": "https://YOUR-BACKEND.up.railway.app/uploads/:path*" },
     { "source": "/thumbnails/:path*", "destination": "https://YOUR-BACKEND.up.railway.app/thumbnails/:path*" },
     { "source": "/(.*)", "destination": "/index.html" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        }
+      ]
+    }
   ]
 }

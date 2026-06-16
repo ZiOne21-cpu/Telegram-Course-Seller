@@ -1,0 +1,23 @@
+# Optional: Docker deployment (alternative to Railway)
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Install dependencies
+COPY package*.json ./
+RUN npm ci --only=production
+
+# Copy source
+COPY . .
+
+# Build TypeScript
+RUN npm run build
+
+# Create data directory
+RUN mkdir -p /app/data
+
+# Expose port
+EXPOSE 3001
+
+# Start
+CMD ["npm", "start"]

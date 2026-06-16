@@ -23,7 +23,15 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen pb-20" style={{ backgroundColor: '#0f0f0f' }}>
+    <div className="min-h-screen pb-20" style={{ backgroundColor: '#0a0e27' }}>
+      {/* Header */}
+      <header className="glass sticky top-0 z-50 border-b border-white/5">
+        <div className="px-4 py-3">
+          <h1 className="text-xl font-bold gradient-text">Nilexis.Et</h1>
+          <p className="text-xs text-gray-400 mt-0.5">Premium Learning Platform</p>
+        </div>
+      </header>
+
       <Routes>
         <Route path="/" element={<CoursesPage />} />
         <Route path="/checkout/:courseId" element={<CheckoutPage />} />
