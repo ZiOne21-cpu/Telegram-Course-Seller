@@ -13,20 +13,19 @@ import { getBot } from './bot';
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Allow both frontend and admin URLs in production
-const allowedOrigins = [
-  process.env.FRONTEND_URL || 'http://localhost:5173',
-  process.env.ADMIN_URL || 'http://localhost:5174',
-  'http://localhost:5173',
-  'http://localhost:5174'
-];
-
+// CORS configuration - allow all origins for now
 app.use(cors({
-  origin: '*', // Allow all origins temporarily to fix CORS
+  origin: '*',
   credentials: false,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'x-admin-id'],
+  preflightContinue: false,
+  optionsSuccessStatus: 204
 }));
+
+// Handle preflight requests explicitly
+app.options('*', cors());
+
 app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, '../../data/uploads')));
 app.use('/thumbnails', express.static(path.join(__dirname, '../../data/thumbnails')));
