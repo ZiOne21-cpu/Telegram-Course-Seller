@@ -38,10 +38,10 @@ export interface PaymentSettings {
   telebirr_name: string; payment_instructions: string;
 }
 
-export const getAllCourses = () => api.get<Course[]>('/courses/all').then(r => r.data);
-export const createCourse = (data: Partial<Course>) => api.post('/courses', data).then(r => r.data);
-export const updateCourse = (id: number, data: Partial<Course>) => api.put(`/courses/${id}`, data).then(r => r.data);
-export const deleteCourse = (id: number) => api.delete(`/courses/${id}`).then(r => r.data);
+export const getAllCourses = () => directApi.get<Course[]>('/courses/all').then(r => r.data);
+export const createCourse = (data: Partial<Course>) => directApi.post('/courses', data).then(r => r.data);
+export const updateCourse = (id: number, data: Partial<Course>) => directApi.put(`/courses/${id}`, data).then(r => r.data);
+export const deleteCourse = (id: number) => directApi.delete(`/courses/${id}`).then(r => r.data);
 export const uploadThumbnail = (file: File) => {
   const fd = new FormData();
   fd.append('thumbnail', file);
@@ -49,11 +49,11 @@ export const uploadThumbnail = (file: File) => {
     headers: { 'Content-Type': 'multipart/form-data' }
   }).then(r => r.data.url);
 };
-export const getAllOrders = (status?: string) => api.get<Order[]>('/orders/all', { params: { status } }).then(r => r.data);
-export const approveOrder = (id: number) => api.post(`/orders/${id}/approve`).then(r => r.data);
-export const rejectOrder = (id: number, note: string) => api.post(`/orders/${id}/reject`, { note }).then(r => r.data);
-export const getPaymentSettings = () => api.get<PaymentSettings>('/settings/payment').then(r => r.data);
-export const updateSettings = (data: Partial<PaymentSettings>) => api.put('/settings', data).then(r => r.data);
-export const getStats = () => api.get<Stats>('/stats').then(r => r.data);
+export const getAllOrders = (status?: string) => directApi.get<Order[]>('/orders/all', { params: { status } }).then(r => r.data);
+export const approveOrder = (id: number) => directApi.post(`/orders/${id}/approve`).then(r => r.data);
+export const rejectOrder = (id: number, note: string) => directApi.post(`/orders/${id}/reject`, { note }).then(r => r.data);
+export const getPaymentSettings = () => directApi.get<PaymentSettings>('/settings/payment').then(r => r.data);
+export const updateSettings = (data: Partial<PaymentSettings>) => directApi.put('/settings', data).then(r => r.data);
+export const getStats = () => directApi.get<Stats>('/stats').then(r => r.data);
 
 export default api;
