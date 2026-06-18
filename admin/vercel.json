@@ -1,6 +1,4 @@
 {
-  "buildCommand": "npx vite build",
-  "outputDirectory": "dist",
   "rewrites": [
     { "source": "/api/:path*", "destination": "https://vibrant-intuition-production-c1e8.up.railway.app/api/:path*" },
     { "source": "/uploads/:path*", "destination": "https://vibrant-intuition-production-c1e8.up.railway.app/uploads/:path*" },
