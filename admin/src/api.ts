@@ -1,8 +1,17 @@
 import axios from 'axios';
 
+// Use Railway backend directly for file uploads, Vercel proxy for API calls
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'https://vibrant-intuition-production-c1e8.up.railway.app';
 const api = axios.create({ baseURL: '/api' });
+const directApi = axios.create({ baseURL: `${BACKEND_URL}/api` });
 
 api.interceptors.request.use(config => {
+  const id = localStorage.getItem('admin_telegram_id') || '';
+  if (id) config.headers['x-admin-id'] = id;
+  return config;
+});
+
+directApi.interceptors.request.use(config => {
   const id = localStorage.getItem('admin_telegram_id') || '';
   if (id) config.headers['x-admin-id'] = id;
   return config;
@@ -36,7 +45,7 @@ export const deleteCourse = (id: number) => api.delete(`/courses/${id}`).then(r 
 export const uploadThumbnail = (file: File) => {
   const fd = new FormData();
   fd.append('thumbnail', file);
-  return api.post<{ url: string }>('/courses/upload-thumbnail', fd, {
+  return directApi.post<{ url: string }>('/courses/upload-thumbnail', fd, {
     headers: { 'Content-Type': 'multipart/form-data' }
   }).then(r => r.data.url);
 };
