@@ -1,10 +1,10 @@
 import { Router, Request, Response } from 'express';
 import db from '../db';
-import { telegramAuth, adminAuth } from '../middleware';
+import { telegramAuth, adminAuth, simpleAdminAuth } from '../middleware';
 
 const router = Router();
 
-router.get('/', telegramAuth, adminAuth, (req: Request, res: Response) => {
+router.get('/', simpleAdminAuth, (req: Request, res: Response) => {
   const totalRevenue = (db.prepare("SELECT SUM(c.price) as total FROM orders o JOIN courses c ON o.course_id=c.id WHERE o.status='approved'").get() as any)?.total || 0;
   const totalBuyers = (db.prepare("SELECT COUNT(DISTINCT telegram_id) as count FROM orders WHERE status='approved'").get() as any)?.count || 0;
   const pendingCount = (db.prepare("SELECT COUNT(*) as count FROM orders WHERE status='pending'").get() as any)?.count || 0;

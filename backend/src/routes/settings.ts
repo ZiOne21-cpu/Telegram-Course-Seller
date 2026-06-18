@@ -1,6 +1,6 @@
 import { Router, Request, Response } from 'express';
 import db from '../db';
-import { telegramAuth, adminAuth } from '../middleware';
+import { telegramAuth, adminAuth, simpleAdminAuth } from '../middleware';
 
 const router = Router();
 
@@ -13,7 +13,7 @@ router.get('/payment', telegramAuth, (req: Request, res: Response) => {
 });
 
 // Admin: update settings
-router.put('/', telegramAuth, adminAuth, (req: Request, res: Response) => {
+router.put('/', simpleAdminAuth, (req: Request, res: Response) => {
   const allowed = ['cbe_account', 'cbe_name', 'telebirr_account', 'telebirr_name', 'payment_instructions'];
   const updates = req.body as Record<string, string>;
 

@@ -3,7 +3,7 @@ import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
 import db from '../db';
-import { telegramAuth, adminAuth } from '../middleware';
+import { telegramAuth, adminAuth, simpleAdminAuth } from '../middleware';
 import { sendInviteLink, sendRejectionMessage, generateInviteLink, sendInviteLinkSafe, sendRejectionSafe } from '../bot';
 
 const router = Router();
@@ -64,7 +64,7 @@ router.get('/mine', telegramAuth, (req: Request, res: Response) => {
 });
 
 // Admin: get all orders with optional status filter
-router.get('/all', telegramAuth, adminAuth, (req: Request, res: Response) => {
+router.get('/all', simpleAdminAuth, (req: Request, res: Response) => {
   const { status } = req.query;
   let query = `
     SELECT o.*, c.title as course_title, c.price as course_price, c.channel_id
@@ -82,7 +82,7 @@ router.get('/all', telegramAuth, adminAuth, (req: Request, res: Response) => {
 });
 
 // Admin: approve order
-router.post('/:id/approve', telegramAuth, adminAuth, async (req: Request, res: Response) => {
+router.post('/:id/approve', simpleAdminAuth, async (req: Request, res: Response) => {
   const order = db.prepare(`
     SELECT o.*, c.title as course_title, c.channel_id 
     FROM orders o JOIN courses c ON o.course_id = c.id 
@@ -110,7 +110,7 @@ router.post('/:id/approve', telegramAuth, adminAuth, async (req: Request, res: R
 });
 
 // Admin: reject order
-router.post('/:id/reject', telegramAuth, adminAuth, async (req: Request, res: Response) => {
+router.post('/:id/reject', simpleAdminAuth, async (req: Request, res: Response) => {
   const { note } = req.body;
   const order = db.prepare(`
     SELECT o.*, c.title as course_title 

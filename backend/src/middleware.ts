@@ -40,3 +40,20 @@ export function adminAuth(req: Request, res: Response, next: NextFunction): void
   }
   next();
 }
+
+// Simple admin auth for admin panel (doesn't use Telegram WebApp)
+export function simpleAdminAuth(req: Request, res: Response, next: NextFunction): void {
+  const adminId = req.headers['x-admin-id'] as string;
+  
+  if (!adminId) {
+    res.status(401).json({ error: 'Missing admin ID' });
+    return;
+  }
+  
+  if (!ADMIN_IDS.includes(adminId.trim())) {
+    res.status(403).json({ error: 'Admin access required' });
+    return;
+  }
+  
+  next();
+}

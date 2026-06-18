@@ -3,7 +3,7 @@ import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
 import db from '../db';
-import { telegramAuth, adminAuth } from '../middleware';
+import { telegramAuth, adminAuth, simpleAdminAuth } from '../middleware';
 
 const router = Router();
 
@@ -32,7 +32,7 @@ function resolveChannelId(input: string): string {
 }
 
 // Thumbnail upload endpoint (admin only)
-router.post('/upload-thumbnail', telegramAuth, adminAuth, uploadThumb.single('thumbnail'), (req: Request, res: Response) => {
+router.post('/upload-thumbnail', simpleAdminAuth, uploadThumb.single('thumbnail'), (req: Request, res: Response) => {
   if (!req.file) {
     res.status(400).json({ error: 'No file uploaded' });
     return;
@@ -47,13 +47,13 @@ router.get('/', telegramAuth, (req: Request, res: Response) => {
 });
 
 // Admin: list all courses
-router.get('/all', telegramAuth, adminAuth, (req: Request, res: Response) => {
+router.get('/all', simpleAdminAuth, (req: Request, res: Response) => {
   const courses = db.prepare('SELECT * FROM courses ORDER BY created_at DESC').all();
   res.json(courses);
 });
 
 // Admin: create course
-router.post('/', telegramAuth, adminAuth, (req: Request, res: Response) => {
+router.post('/', simpleAdminAuth, (req: Request, res: Response) => {
   const { title, description, price, thumbnail_url, channel_id } = req.body;
   if (!title || !description || !price || !channel_id) {
     res.status(400).json({ error: 'Missing required fields' });
@@ -67,7 +67,7 @@ router.post('/', telegramAuth, adminAuth, (req: Request, res: Response) => {
 });
 
 // Admin: update course
-router.put('/:id', telegramAuth, adminAuth, (req: Request, res: Response) => {
+router.put('/:id', simpleAdminAuth, (req: Request, res: Response) => {
   const { title, description, price, thumbnail_url, channel_id, active } = req.body;
   const resolvedId = resolveChannelId(channel_id);
   db.prepare(
@@ -77,7 +77,7 @@ router.put('/:id', telegramAuth, adminAuth, (req: Request, res: Response) => {
 });
 
 // Admin: delete course
-router.delete('/:id', telegramAuth, adminAuth, (req: Request, res: Response) => {
+router.delete('/:id', simpleAdminAuth, (req: Request, res: Response) => {
   db.prepare('DELETE FROM courses WHERE id=?').run(req.params.id);
   res.json({ message: 'Course deleted' });
 });
