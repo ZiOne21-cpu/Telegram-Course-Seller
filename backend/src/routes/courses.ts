@@ -32,6 +32,11 @@ function resolveChannelId(input: string): string {
 }
 
 // Thumbnail upload endpoint (admin only)
+// Handle preflight OPTIONS request separately
+router.options('/upload-thumbnail', (req: Request, res: Response) => {
+  res.status(200).end();
+});
+
 router.post('/upload-thumbnail', simpleAdminAuth, uploadThumb.single('thumbnail'), (req: Request, res: Response) => {
   if (!req.file) {
     res.status(400).json({ error: 'No file uploaded' });

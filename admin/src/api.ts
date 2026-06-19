@@ -62,10 +62,11 @@ export const uploadThumbnail = (file: File) => {
   fd.append('thumbnail', file);
   
   console.log('=== UPLOAD DEBUG ===');
-  console.log('Uploading to Railway directly:', 'https://telegram-course-seller-production-49a2.up.railway.app/api/courses/upload-thumbnail');
+  console.log('Uploading via Vercel proxy (to avoid CORS)');
   console.log('File:', file.name, file.size, 'bytes');
   
-  return directApi.post<{ url: string }>('/courses/upload-thumbnail', fd, {
+  // Use api (Vercel proxy) instead of directApi to avoid CORS
+  return api.post<{ url: string }>('/courses/upload-thumbnail', fd, {
     headers: { 'Content-Type': 'multipart/form-data' }
   })
   .then(r => {
