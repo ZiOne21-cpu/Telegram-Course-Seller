@@ -1,32 +1,17 @@
 {
   "rewrites": [
-<<<<<<< HEAD
     { "source": "/api/:path*", "destination": "https://telegram-course-seller-production-49a2.up.railway.app/api/:path*" },
     { "source": "/uploads/:path*", "destination": "https://telegram-course-seller-production-49a2.up.railway.app/uploads/:path*" },
     { "source": "/thumbnails/:path*", "destination": "https://telegram-course-seller-production-49a2.up.railway.app/thumbnails/:path*" },
-=======
-    { "source": "/api/:path*", "destination": "telegram-course-seller-production.up.railway.app*" },
-    { "source": "/uploads/:path*", "destination": "https://vibrant-intuition-production-c1e8.up.railway.app/uploads/:path*" },
-    { "source": "/thumbnails/:path*", "destination": "https://vibrant-intuition-production-c1e8.up.railway.app/thumbnails/:path*" },
->>>>>>> 7a80565d5a05502ea02c50cf3191c5aa68832606
     { "source": "/(.*)", "destination": "/index.html" }
   ],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        },
-        {
-          "key": "X-Frame-Options",
-          "value": "DENY"
-        },
-        {
-          "key": "X-XSS-Protection",
-          "value": "1; mode=block"
-        }
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "X-XSS-Protection", "value": "1; mode=block" }
       ]
     }
   ]
