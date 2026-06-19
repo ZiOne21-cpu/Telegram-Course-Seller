@@ -37,7 +37,16 @@ export async function sendInviteLink(telegramId: string, courseName: string, inv
     `✅ *Payment Approved!*\n\n` +
     `Your access to *${courseName}* has been approved.\n\n` +
     `🔗 Your private invite link:\n${inviteLink}\n\n` +
-    `⚠️ This link is one-time use. Join immediately!`,
+    `⚠️ *IMPORTANT:*\n` +
+    `• This link is *ONE-TIME USE* only\n` +
+    `• It expires in *3 days*\n` +
+    `• Join immediately!\n` +
+    `• Do NOT share this link - it will not work for others\n\n` +
+    `🇪🇹 *ጠቃሚ መረጃ:*\n` +
+    `• ይህ ሊንክ *ለአንድ ጊዜ ብቻ* ነው\n` +
+    `• በ3 ቀናት ውስጥ ይቃጠላል!\n` +
+    `• ወዲያውኑ ይቀላቀሉ!\n` +
+    `• መልካም ትምህርት!!`,
     { parse_mode: 'Markdown' }
   );
 }
@@ -60,10 +69,15 @@ export async function generateInviteLink(channelId: string): Promise<string> {
     return `https://t.me/joinchat/DEV_TEST_LINK_${Date.now()}`;
   }
   const b = getBot();
+  
+  // SECURITY: Generate secure one-time invite link
   const link = await b.createChatInviteLink(channelId, {
-    member_limit: 1,
-    expire_date: Math.floor(Date.now() / 1000) + 86400 * 7 // 7 days
+    member_limit: 1,  // ✅ IMPORTANT: Only ONE person can use this link
+    expire_date: Math.floor(Date.now() / 1000) + 86400 * 3, // ✅ Expires in 3 days (shorter = more secure)
+    creates_join_request: false // Buyer joins immediately without approval
   });
+  
+  console.log(`✅ Secure invite generated: one-time use, expires in 3 days`);
   return link.invite_link;
 }
 
