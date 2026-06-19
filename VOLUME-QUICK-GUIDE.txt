@@ -1,0 +1,80 @@
+╔════════════════════════════════════════════════════════╗
+║        🗄️ RAILWAY VOLUME - QUICK SETUP GUIDE         ║
+╚════════════════════════════════════════════════════════╝
+
+WHY: Uploaded files disappear when Railway restarts
+FIX: Add persistent volume storage
+TIME: 10 minutes
+
+═══════════════════════════════════════════════════════════
+
+STEP 1: Go to Railway
+───────────────────────────────────────────────────────────
+https://railway.app/
+→ Login
+→ Click your backend service
+
+═══════════════════════════════════════════════════════════
+
+STEP 2: Add Volume
+───────────────────────────────────────────────────────────
+→ Click "Volumes" tab
+→ Click "+ New Volume"
+
+Settings:
+  Mount Path: /app/data
+  Size: 1 GB
+
+→ Click "Add"
+
+═══════════════════════════════════════════════════════════
+
+STEP 3: Wait for Redeploy
+───────────────────────────────────────────────────────────
+Railway will automatically redeploy (2-3 minutes)
+Wait for "Active" status
+
+═══════════════════════════════════════════════════════════
+
+STEP 4: Test It Works
+───────────────────────────────────────────────────────────
+1. Upload a test screenshot via Telegram bot
+2. Check admin panel can view it
+3. Manually redeploy backend
+4. Screenshot should still be there! ✅
+
+═══════════════════════════════════════════════════════════
+
+IMPORTANT:
+───────────────────────────────────────────────────────────
+Mount path MUST be exactly: /app/data
+
+This matches your backend folder structure:
+  backend/data/uploads/
+  backend/data/thumbnails/
+  backend/data/app.db
+
+═══════════════════════════════════════════════════════════
+
+COST:
+───────────────────────────────────────────────────────────
+1GB volume ≈ $0.25/month
+Included in Railway $5/month Hobby plan
+
+═══════════════════════════════════════════════════════════
+
+TROUBLESHOOTING:
+───────────────────────────────────────────────────────────
+• Can't find Volumes tab?
+  → Look for "Data" or "Storage" tab
+
+• Free tier limit?
+  → Upgrade to Hobby plan ($5/month)
+
+• Files still disappear?
+  → Check mount path is exactly /app/data
+  → Check volume shows "Mounted" status
+
+═══════════════════════════════════════════════════════════
+
+See RAILWAY-VOLUME-SETUP.md for detailed guide!

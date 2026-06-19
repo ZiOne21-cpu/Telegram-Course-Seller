@@ -1,0 +1,62 @@
+═══════════════════════════════════════════════════════
+  🚀 RUN THESE COMMANDS TO FIX THE ERROR
+═══════════════════════════════════════════════════════
+
+STEP 1: Navigate to project folder
+───────────────────────────────────────────────────────
+cd "z:\MY FILES\AI House\Telegram Course Seller"
+
+
+STEP 2: Stage the fixed files
+───────────────────────────────────────────────────────
+git add admin/src/api.ts
+git add admin/src/pages/SetupPage.tsx
+git add admin/src/pages/DashboardPage.tsx
+git add admin/src/pages/OrdersPage.tsx
+
+
+STEP 3: Commit the changes
+───────────────────────────────────────────────────────
+git commit -m "fix: Add cache-busting headers and response validation to prevent map() errors"
+
+
+STEP 4: Push to GitHub (triggers Vercel deployment)
+───────────────────────────────────────────────────────
+git push origin main
+
+
+STEP 5: Wait for Vercel to deploy (1-2 minutes)
+───────────────────────────────────────────────────────
+Watch: https://vercel.com/dashboard
+Or check: https://nilexis-admin.vercel.app
+
+
+STEP 6: Clear your browser cache
+───────────────────────────────────────────────────────
+Option A (Quick): Go to admin panel and press Ctrl+Shift+R
+Option B (Full):  Press Ctrl+Shift+Delete and clear cache
+
+
+STEP 7: Test the admin panel
+───────────────────────────────────────────────────────
+1. Go to: https://nilexis-admin.vercel.app
+2. Log out (if already logged in)
+3. Log in with your Telegram ID: 387957921
+4. Test all pages:
+   - Dashboard (should show stats)
+   - Courses (should show list)
+   - Orders (should show list)
+   - Payment Setup (should save without error)
+
+
+═══════════════════════════════════════════════════════
+  ✅ DONE! The error should be fixed.
+═══════════════════════════════════════════════════════
+
+What was fixed:
+- ✅ Added cache-busting headers (stops 304 responses)
+- ✅ Added response validation (checks if data is array)
+- ✅ Added error handling to all pages
+- ✅ All API calls return safe defaults on error
+
+If still not working, read CACHE-FIX-APPLIED.md for details.

@@ -1,0 +1,46 @@
+==========================================
+  CORS FIX APPLIED - DO THESE 5 STEPS
+==========================================
+
+STEP 1: Go to Railway Dashboard
+→ https://railway.app/
+→ Click your backend service
+→ Go to "Deployments" tab
+→ WAIT for new deployment to finish (2-3 minutes)
+→ Look for commit: "Fix CORS preflight handling for file uploads"
+
+STEP 2: Kill Local Node (Again!)
+→ Open PowerShell
+→ Run: tasklist | findstr "node.exe"
+→ If you see any processes: taskkill /F /IM node.exe
+→ WAIT 60 SECONDS
+
+STEP 3: Check Backend Health
+→ Open browser
+→ Go to: https://vibrant-intuition-production-c1e8.up.railway.app/health
+→ Should see: {"ok":true}
+
+STEP 4: Check Railway Logs
+→ In Railway dashboard
+→ Look for: "✅ Telegram bot started"
+→ Make sure NO "409 Conflict" errors
+
+STEP 5: Test Upload
+→ Go to: https://nilexis-admin.vercel.app/
+→ Courses → Add New Course
+→ Upload Thumbnail
+→ Should work now!
+
+==========================================
+
+TIMELINE:
+Now:        Code pushed ✅
++2 min:     Railway redeployed
++3 min:     Test upload
+
+IF STILL FAILS:
+- Press F12 in browser
+- Take screenshot of Console + Network tabs
+- Share screenshot
+
+==========================================

@@ -1,0 +1,60 @@
+╔════════════════════════════════════════════════════════╗
+║   🔧 FIX ADMIN SCREENSHOT 404 ERROR - QUICK GUIDE     ║
+╚════════════════════════════════════════════════════════╝
+
+PROBLEM: Screenshots show 404 Not Found
+CAUSE: Admin vercel.json using old backend URL
+STATUS: ✅ Fixed in code, needs Vercel redeploy
+
+═══════════════════════════════════════════════════════════
+
+METHOD 1: Edit on GitHub (Easiest)
+───────────────────────────────────────────────────────────
+1. Go to your admin repository on GitHub
+2. Open: vercel.json
+3. Click Edit (pencil icon)
+4. Find: vibrant-intuition-production-c1e8.up.railway.app
+5. Replace with: telegram-course-seller-production.up.railway.app
+6. Commit changes
+7. Vercel auto-deploys (wait 2-3 min)
+
+═══════════════════════════════════════════════════════════
+
+METHOD 2: Manual File Upload to Vercel
+───────────────────────────────────────────────────────────
+1. Go to: https://vercel.com/new
+2. Click "Browse" to upload files
+3. Select folder: z:\MY FILES\AI House\Telegram Course Seller\admin
+4. Deploy
+5. Update domain if needed
+
+═══════════════════════════════════════════════════════════
+
+VERIFY IT WORKS:
+───────────────────────────────────────────────────────────
+1. Go to: https://nilexis-admin.vercel.app/orders
+2. Click "View Screenshot" on any order
+3. Screenshot should load (not 404)
+
+═══════════════════════════════════════════════════════════
+
+QUICK TEST URL:
+───────────────────────────────────────────────────────────
+Try opening:
+https://nilexis-admin.vercel.app/uploads/1781798190757-photo_2026-06-13_04-17-15.jpg
+
+Before fix: 404 Not Found
+After fix: Shows the screenshot image
+
+═══════════════════════════════════════════════════════════
+
+TEMPORARY WORKAROUND:
+───────────────────────────────────────────────────────────
+View screenshots directly on Railway:
+https://telegram-course-seller-production.up.railway.app/uploads/[filename]
+
+Replace [filename] with the actual filename from the order
+
+═══════════════════════════════════════════════════════════
+
+See ADMIN-SCREENSHOT-FIX.md for detailed instructions!

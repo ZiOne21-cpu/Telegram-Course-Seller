@@ -1,0 +1,54 @@
+╔════════════════════════════════════════════════════════╗
+║     🚨 IMAGE UPLOAD FIX - DO THESE 3 STEPS NOW 🚨     ║
+╚════════════════════════════════════════════════════════╝
+
+PROBLEM FOUND:
+1. Wrong backend URL in admin panel
+2. Bot conflict (409 error) - local Node.js blocking Railway
+
+═══════════════════════════════════════════════════════════
+
+STEP 1: Kill Local Node (PowerShell as Admin)
+───────────────────────────────────────────────────────────
+taskkill /F /IM node.exe
+
+WAIT 60 SECONDS! ⏱️
+═══════════════════════════════════════════════════════════
+
+STEP 2: Restart Railway Backend
+───────────────────────────────────────────────────────────
+1. Go to: https://railway.app/
+2. Click backend service
+3. Click ⋯ menu → Restart
+4. Wait for "Active" (green)
+5. Check logs for: "✅ Telegram bot started"
+6. NO 409 errors should appear
+
+═══════════════════════════════════════════════════════════
+
+STEP 3: Update Vercel Admin Panel
+───────────────────────────────────────────────────────────
+1. Go to: https://vercel.com/dashboard
+2. Find "nilexis-admin" project
+3. Settings → Environment Variables
+4. Edit VITE_BACKEND_URL to:
+   https://telegram-course-seller-production.up.railway.app
+5. Save
+6. Deployments → Latest → ⋯ → Redeploy
+7. Wait 2-3 minutes
+
+═══════════════════════════════════════════════════════════
+
+VERIFY IT WORKS:
+───────────────────────────────────────────────────────────
+1. Open: https://telegram-course-seller-production.up.railway.app/health
+   Should show: {"ok":true}
+
+2. Go to: https://nilexis-admin.vercel.app/
+   Try uploading an image
+
+═══════════════════════════════════════════════════════════
+
+TOTAL TIME: ~12 minutes
+
+See URGENT-FIX-REQUIRED.md for detailed instructions!
