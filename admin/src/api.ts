@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-// Use Railway backend directly for file uploads, Vercel proxy for API calls
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'https://telegram-course-seller-production-49a2.up.railway.app';
+// HARDCODED Railway backend URL - no environment variables needed
+const RAILWAY_BACKEND = 'https://telegram-course-seller-production-49a2.up.railway.app';
 const api = axios.create({ baseURL: '/api' });
-const directApi = axios.create({ baseURL: `${BACKEND_URL}/api` });
+const directApi = axios.create({ baseURL: `${RAILWAY_BACKEND}/api` });
 
 api.interceptors.request.use(config => {
   const id = localStorage.getItem('admin_telegram_id') || '';
@@ -60,9 +60,24 @@ export const deleteCourse = (id: number) => api.delete(`/courses/${id}`).then(r 
 export const uploadThumbnail = (file: File) => {
   const fd = new FormData();
   fd.append('thumbnail', file);
+  
+  console.log('=== UPLOAD DEBUG ===');
+  console.log('Uploading to Railway directly:', 'https://telegram-course-seller-production-49a2.up.railway.app/api/courses/upload-thumbnail');
+  console.log('File:', file.name, file.size, 'bytes');
+  
   return directApi.post<{ url: string }>('/courses/upload-thumbnail', fd, {
     headers: { 'Content-Type': 'multipart/form-data' }
-  }).then(r => r.data.url);
+  })
+  .then(r => {
+    console.log('✅ Upload success:', r.data);
+    return r.data.url;
+  })
+  .catch(err => {
+    console.error('❌ Upload error:', err);
+    console.error('Error response:', err.response?.data);
+    console.error('Error status:', err.response?.status);
+    throw err;
+  });
 };
 export const getAllOrders = (status?: string) => api.get<Order[]>('/orders/all', { params: { status } }).then(r => {
   // Validate response is an array

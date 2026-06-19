@@ -1,11 +1,20 @@
 {
   "rewrites": [
+    { "source": "/api/courses/upload-thumbnail", "destination": "https://telegram-course-seller-production-49a2.up.railway.app/api/courses/upload-thumbnail" },
     { "source": "/api/:path*", "destination": "https://telegram-course-seller-production-49a2.up.railway.app/api/:path*" },
     { "source": "/uploads/:path*", "destination": "https://telegram-course-seller-production-49a2.up.railway.app/uploads/:path*" },
     { "source": "/thumbnails/:path*", "destination": "https://telegram-course-seller-production-49a2.up.railway.app/thumbnails/:path*" },
     { "source": "/(.*)", "destination": "/index.html" }
   ],
   "headers": [
+    {
+      "source": "/api/courses/upload-thumbnail",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "POST, OPTIONS" },
+        { "key": "Access-Control-Allow-Headers", "value": "Content-Type, x-admin-id" }
+      ]
+    },
     {
       "source": "/(.*)",
       "headers": [
