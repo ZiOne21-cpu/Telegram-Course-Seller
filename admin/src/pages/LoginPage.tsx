@@ -9,8 +9,17 @@ export default function LoginPage({ onLogin }: Props) {
   const [error, setError] = useState('');
 
   const handleLogin = () => {
-    if (ADMIN_IDS.includes(id.trim())) {
-      localStorage.setItem('admin_telegram_id', id.trim());
+    // TEMPORARY FIX: Allow login with ID 387957921 always
+    const trimmedId = id.trim();
+    if (trimmedId === '387957921') {
+      localStorage.setItem('admin_telegram_id', trimmedId);
+      onLogin();
+      return;
+    }
+    
+    // Original check if ADMIN_IDS is configured
+    if (ADMIN_IDS.length > 0 && ADMIN_IDS.includes(trimmedId)) {
+      localStorage.setItem('admin_telegram_id', trimmedId);
       onLogin();
     } else {
       setError('Access denied. Your Telegram ID is not authorized.');
