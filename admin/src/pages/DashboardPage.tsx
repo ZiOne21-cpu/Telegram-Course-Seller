@@ -5,7 +5,15 @@ export default function DashboardPage() {
   const [stats, setStats] = useState<Stats | null>(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => { getStats().then(setStats).finally(() => setLoading(false)); }, []);
+  useEffect(() => { 
+    getStats()
+      .then(setStats)
+      .catch(err => {
+        console.error('Failed to load stats:', err);
+        // Stats will remain null, showing zeros
+      })
+      .finally(() => setLoading(false)); 
+  }, []);
 
   const cards = [
     { label: 'Total Revenue', value: `${(stats?.totalRevenue || 0).toLocaleString()} ETB`, icon: '💰', color: 'from-emerald-500 to-green-500', bg: 'bg-emerald-50', text: 'text-emerald-700' },

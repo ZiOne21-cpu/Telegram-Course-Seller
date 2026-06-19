@@ -12,7 +12,20 @@ export default function CoursesPage() {
   const [thumbUploading, setThumbUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const load = () => getAllCourses().then(setCourses).finally(() => setLoading(false));
+  const load = () => getAllCourses()
+    .then(data => {
+      if (Array.isArray(data)) {
+        setCourses(data);
+      } else {
+        console.error('API returned non-array:', data);
+        setCourses([]);
+      }
+    })
+    .catch(err => {
+      console.error('Failed to load courses:', err);
+      setCourses([]);
+    })
+    .finally(() => setLoading(false));
   useEffect(() => { load(); }, []);
 
   const startEdit = (course: Partial<Course>) => {

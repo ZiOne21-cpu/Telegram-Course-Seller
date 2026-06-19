@@ -8,12 +8,20 @@ const directApi = axios.create({ baseURL: `${BACKEND_URL}/api` });
 api.interceptors.request.use(config => {
   const id = localStorage.getItem('admin_telegram_id') || '';
   if (id) config.headers['x-admin-id'] = id;
+  // Prevent caching
+  config.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate';
+  config.headers['Pragma'] = 'no-cache';
+  config.headers['Expires'] = '0';
   return config;
 });
 
 directApi.interceptors.request.use(config => {
   const id = localStorage.getItem('admin_telegram_id') || '';
   if (id) config.headers['x-admin-id'] = id;
+  // Prevent caching
+  config.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate';
+  config.headers['Pragma'] = 'no-cache';
+  config.headers['Expires'] = '0';
   return config;
 });
 
@@ -38,7 +46,14 @@ export interface PaymentSettings {
   telebirr_name: string; payment_instructions: string;
 }
 
-export const getAllCourses = () => directApi.get<Course[]>('/courses/all').then(r => r.data);
+export const getAllCourses = () => directApi.get<Course[]>('/courses/all').then(r => {
+  // Validate response is an array
+  if (!Array.isArray(r.data)) {
+    console.error('getAllCourses: Expected array but got:', r.data);
+    return [];
+  }
+  return r.data;
+});
 export const createCourse = (data: Partial<Course>) => directApi.post('/courses', data).then(r => r.data);
 export const updateCourse = (id: number, data: Partial<Course>) => directApi.put(`/courses/${id}`, data).then(r => r.data);
 export const deleteCourse = (id: number) => directApi.delete(`/courses/${id}`).then(r => r.data);
@@ -49,10 +64,24 @@ export const uploadThumbnail = (file: File) => {
     headers: { 'Content-Type': 'multipart/form-data' }
   }).then(r => r.data.url);
 };
-export const getAllOrders = (status?: string) => directApi.get<Order[]>('/orders/all', { params: { status } }).then(r => r.data);
+export const getAllOrders = (status?: string) => directApi.get<Order[]>('/orders/all', { params: { status } }).then(r => {
+  // Validate response is an array
+  if (!Array.isArray(r.data)) {
+    console.error('getAllOrders: Expected array but got:', r.data);
+    return [];
+  }
+  return r.data;
+});
 export const approveOrder = (id: number) => directApi.post(`/orders/${id}/approve`).then(r => r.data);
 export const rejectOrder = (id: number, note: string) => directApi.post(`/orders/${id}/reject`, { note }).then(r => r.data);
-export const getPaymentSettings = () => directApi.get<PaymentSettings>('/settings/payment').then(r => r.data);
+export const getPaymentSettings = () => directApi.get<PaymentSettings>('/settings/payment').then(r => {
+  // Validate response is an object with expected shape
+  if (!r.data || typeof r.data !== 'object' || 'error' in r.data) {
+    console.error('getPaymentSettings: Invalid response:', r.data);
+    return { cbe_account: '', cbe_name: '', telebirr_account: '', telebirr_name: '', payment_instructions: '' };
+  }
+  return r.data;
+});
 export const updateSettings = (data: Partial<PaymentSettings>) => directApi.put('/settings', data).then(r => r.data);
 export const getStats = () => directApi.get<Stats>('/stats').then(r => r.data);
 

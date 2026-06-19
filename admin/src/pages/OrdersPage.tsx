@@ -11,7 +11,13 @@ export default function OrdersPage() {
 
   const load = () => {
     setLoading(true);
-    getAllOrders(filter === 'all' ? undefined : filter).then(setOrders).finally(() => setLoading(false));
+    getAllOrders(filter === 'all' ? undefined : filter)
+      .then(setOrders)
+      .catch(err => {
+        console.error('Failed to load orders:', err);
+        setOrders([]);
+      })
+      .finally(() => setLoading(false));
   };
 
   useEffect(() => { load(); }, [filter]);

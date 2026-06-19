@@ -7,7 +7,15 @@ export default function SetupPage() {
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
 
-  useEffect(() => { getPaymentSettings().then(setForm).finally(() => setLoading(false)); }, []);
+  useEffect(() => { 
+    getPaymentSettings()
+      .then(setForm)
+      .catch(err => {
+        console.error('Failed to load payment settings:', err);
+        // Keep default empty form
+      })
+      .finally(() => setLoading(false)); 
+  }, []);
 
   const handleSave = async () => {
     setSaving(true);
