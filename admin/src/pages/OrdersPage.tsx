@@ -99,7 +99,7 @@ export default function OrdersPage() {
                 </div>
                 <div className="flex gap-3 mt-3">
                   {order.screenshot_path && (
-                    <a href={`/uploads/${order.screenshot_path}`} target="_blank" rel="noreferrer"
+                    <a href={`https://telegram-course-seller-production-49a2.up.railway.app/uploads/${order.screenshot_path}`} target="_blank" rel="noreferrer"
                       className="text-sm text-blue-500 underline">
                       📷 View Screenshot
                     </a>

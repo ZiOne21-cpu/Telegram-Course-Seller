@@ -1,8 +1,8 @@
 {
   "rewrites": [
-    { "source": "/api/:path*", "destination": "https://vibrant-intuition-production-c1e8.up.railway.app/api/:path*" },
-    { "source": "/uploads/:path*", "destination": "https://vibrant-intuition-production-c1e8.up.railway.app/uploads/:path*" },
-    { "source": "/thumbnails/:path*", "destination": "https://vibrant-intuition-production-c1e8.up.railway.app/thumbnails/:path*" },
+    { "source": "/api/:path*", "destination": "https://telegram-course-seller-production-49a2.up.railway.app/api/:path*" },
+    { "source": "/uploads/:path*", "destination": "https://telegram-course-seller-production-49a2.up.railway.app/uploads/:path*" },
+    { "source": "/thumbnails/:path*", "destination": "https://telegram-course-seller-production-49a2.up.railway.app/thumbnails/:path*" },
     { "source": "/(.*)", "destination": "/index.html" }
   ],
   "headers": [
