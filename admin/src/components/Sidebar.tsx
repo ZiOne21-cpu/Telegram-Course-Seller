@@ -7,12 +7,20 @@ const links = [
   { to: '/setup', icon: '💳', label: 'Payment Setup' },
 ];
 
-export default function Sidebar() {
+interface SidebarProps {
+  onNavigate?: () => void;
+}
+
+export default function Sidebar({ onNavigate }: SidebarProps) {
   const navigate = useNavigate();
   const logout = () => {
     localStorage.removeItem('admin_telegram_id');
     navigate('/');
     window.location.reload();
+  };
+
+  const handleNavClick = () => {
+    if (onNavigate) onNavigate();
   };
 
   return (
@@ -33,7 +41,7 @@ export default function Sidebar() {
       {/* Navigation */}
       <nav className="flex-1 p-4 space-y-2">
         {links.map(l => (
-          <NavLink key={l.to} to={l.to}
+          <NavLink key={l.to} to={l.to} onClick={handleNavClick}
             className={({ isActive }) =>
               `flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold smooth-transition ${
                 isActive 

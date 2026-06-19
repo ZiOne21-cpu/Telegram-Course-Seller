@@ -43,14 +43,17 @@ export default function CoursesPage() {
         <div className="flex items-center gap-2 mb-3">
           <div className="w-1 h-6 bg-gradient-to-b from-indigo-500 to-purple-500 rounded-full"></div>
           <p className="text-sm font-bold tracking-wide uppercase gradient-text">
-            Premium Courses
+            Premium Courses • ፕሪሚየም ትምህርቶች
           </p>
         </div>
         <h1 className="text-3xl font-black text-white leading-tight mb-3 tracking-tight">
           All the Creative Courses<br />You Need In One Place
         </h1>
-        <p className="text-gray-400 text-sm">
+        <p className="text-gray-400 text-sm mb-1">
           Unlock exclusive content and join private channels instantly
+        </p>
+        <p className="text-gray-500 text-xs italic">
+          ልዩ ይዘቶችን ይክፈቱ እና ወዲያውኑ የግል ቻናሎችን ይቀላቀሉ
         </p>
       </div>
 
@@ -60,7 +63,8 @@ export default function CoursesPage() {
           <div className="glass rounded-3xl p-10 max-w-sm mx-auto">
             <div className="text-7xl mb-4 opacity-50">📚</div>
             <p className="text-gray-300 font-semibold text-lg mb-2">No courses yet</p>
-            <p className="text-gray-500 text-sm">Check back soon for new content!</p>
+            <p className="text-gray-400 text-xs mb-1">Check back soon for new content!</p>
+            <p className="text-gray-500 text-xs italic">ለአዲስ ይዘቶች በቅርቡ ይመልሱ!</p>
           </div>
         </div>
       ) : (

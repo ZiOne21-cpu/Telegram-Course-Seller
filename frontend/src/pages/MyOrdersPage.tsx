@@ -17,14 +17,16 @@ export default function MyOrdersPage() {
 
   return (
     <div className="p-4">
-      <h1 className="text-2xl font-bold text-white mb-1">My Orders</h1>
-      <p className="text-gray-400 text-sm mb-5">Track your course purchases</p>
+      <h1 className="text-2xl font-bold text-white mb-1">My Orders / የእኔ ትዕዛዞች</h1>
+      <p className="text-gray-400 text-sm mb-1">Track your course purchases</p>
+      <p className="text-gray-500 text-xs italic mb-5">የኮርስ ግዢዎችዎን ይከታተሉ</p>
 
       {orders.length === 0 ? (
         <div className="text-center py-16">
           <div className="text-6xl mb-4">🛒</div>
-          <p className="text-white font-semibold mb-1">No orders yet</p>
-          <p className="text-gray-400 text-sm">Browse courses and make your first purchase</p>
+          <p className="text-white font-semibold mb-1">No orders yet / ገና ትዕዛዝ የለም</p>
+          <p className="text-gray-400 text-sm mb-1">Browse courses and make your first purchase</p>
+          <p className="text-gray-500 text-xs italic">ኮርሶችን ያስሱ እና የመጀመሪያ ግዢዎን ያድርጉ</p>
         </div>
       ) : (
         <div className="space-y-3">

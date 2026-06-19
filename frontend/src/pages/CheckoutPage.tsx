@@ -96,7 +96,8 @@ export default function CheckoutPage() {
 
       {/* Payment accounts */}
       <div className="rounded-2xl p-4 border border-white/10 mb-5" style={{ backgroundColor: '#1a1a1a' }}>
-        <h3 className="font-semibold text-white mb-3">💳 Send Payment To</h3>
+        <h3 className="font-semibold text-white mb-1">💳 Send Payment To</h3>
+        <p className="text-xs text-gray-500 italic mb-3">ክፍያ ወደ • Send Payment To</p>
         {settings?.payment_instructions && (
           <p className="text-xs text-gray-400 mb-3 leading-relaxed">{settings.payment_instructions}</p>
         )}
@@ -132,12 +133,13 @@ export default function CheckoutPage() {
 
       {/* Buyer form */}
       <div className="space-y-3 mb-5">
-        <h3 className="font-semibold text-white">📝 Your Details</h3>
-        <input type="text" placeholder="Full Name *" value={form.full_name}
+        <h3 className="font-semibold text-white mb-1">📝 Your Details</h3>
+        <p className="text-xs text-gray-500 italic mb-2">የእርስዎ ዝርዝሮች • Your Details</p>
+        <input type="text" placeholder="Full Name * / ሙሉ ስም *" value={form.full_name}
           onChange={e => setForm(f => ({ ...f, full_name: e.target.value }))}
           className="w-full rounded-xl px-4 py-3 text-sm text-white outline-none focus:ring-2 focus:ring-orange-500/50 border border-white/10"
           style={{ backgroundColor: '#1a1a1a' }} />
-        <input type="tel" placeholder="Phone Number *" value={form.phone}
+        <input type="tel" placeholder="Phone Number * / ስልክ ቁጥር *" value={form.phone}
           onChange={e => setForm(f => ({ ...f, phone: e.target.value }))}
           className="w-full rounded-xl px-4 py-3 text-sm text-white outline-none focus:ring-2 focus:ring-orange-500/50 border border-white/10"
           style={{ backgroundColor: '#1a1a1a' }} />
@@ -145,7 +147,8 @@ export default function CheckoutPage() {
 
       {/* Screenshot upload */}
       <div className="mb-6">
-        <h3 className="font-semibold text-white mb-2">📸 Payment Screenshot *</h3>
+        <h3 className="font-semibold text-white mb-1">📸 Payment Screenshot *</h3>
+        <p className="text-xs text-gray-500 italic mb-2">የክፍያ ፎቶ • Payment Screenshot</p>
         <label className="block border-2 border-dashed rounded-2xl cursor-pointer transition-colors overflow-hidden"
           style={{ borderColor: screenshot ? '#22c55e' : '#333' }}>
           {previewUrl ? (
@@ -170,7 +173,7 @@ export default function CheckoutPage() {
       <button onClick={handleSubmit} disabled={submitting}
         className="w-full py-4 rounded-2xl font-bold text-white text-base disabled:opacity-50 transition-opacity hover:opacity-90"
         style={{ background: submitting ? '#555' : 'linear-gradient(135deg, #f97316, #ea580c)' }}>
-        {submitting ? 'Submitting...' : '✅ Submit Payment'}
+        {submitting ? 'Submitting... / በመላክ ላይ...' : '✅ Submit Payment / ክፍያ ያስገቡ'}
       </button>
     </div>
   );
