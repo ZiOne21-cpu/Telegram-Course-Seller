@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Use Railway backend directly for file uploads, Vercel proxy for API calls
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'https://vibrant-intuition-production-c1e8.up.railway.app';
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'https://telegram-course-seller-production-49a2.up.railway.app';
 const api = axios.create({ baseURL: '/api' });
 const directApi = axios.create({ baseURL: `${BACKEND_URL}/api` });
 
